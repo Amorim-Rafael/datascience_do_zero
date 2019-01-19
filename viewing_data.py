@@ -1,4 +1,7 @@
-from matplotlib import pyplot as plt
+# import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('agg')
+import matplotlib.pyplot as plt
 
 #-Exemplo 1--Grafico em Linha------------------------------------------------------
 # years = [1950, 1960, 1970, 1980, 1990, 2000, 2010]
@@ -77,21 +80,40 @@ from matplotlib import pyplot as plt
 # plt.show()
 
 #-Exemplo 5--Grafico em Linha------------------------------------------------------
-variance = [1,2,4,8,16,32,64,128,256]
-bias_squared = [256,128,64,32,16,8,4,2,1]
-total_error = [x + y for x, y in zip(variance, bias_squared)]
-xs = [i for i, _ in enumerate(variance)]
+# variance = [1,2,4,8,16,32,64,128,256]
+# bias_squared = [256,128,64,32,16,8,4,2,1]
+# total_error = [x + y for x, y in zip(variance, bias_squared)]
+# xs = [i for i, _ in enumerate(variance)]
 
-# podemos fazer multiplas chamadas paraplt.plot
-# para mostrar multiplas series no mesmo grafico
-plt.plot(xs, variance, 'g-', label='variance')          # linha verde solida
-plt.plot(xs, bias_squared, c='r', ls='-.', label='bias^2')        # linha com ponto tracejado vermelho
-plt.plot(xs, total_error, 'b:', label='total error')    # linha com pontilhado azul
+# # podemos fazer multiplas chamadas paraplt.plot
+# # para mostrar multiplas series no mesmo grafico
+# plt.plot(xs, variance, 'g-', label='variance')          # linha verde solida
+# plt.plot(xs, bias_squared, c='r', ls='-.', label='bias^2')        # linha com ponto tracejado vermelho
+# plt.plot(xs, total_error, 'b:', label='total error')    # linha com pontilhado azul
 
-# como atribuimos rotulos(label) para cada um
-# podemos inserir uma legenda
-# loc=9 significa 'top center'
-plt.legend(loc=9)
-plt.xlabel('complexidade do modelo')
-plt.title('Compromisso entre Polarização e Variância')
-plt.show()
+# # como atribuimos rotulos(label) para cada um
+# # podemos inserir uma legenda
+# # loc=9 significa 'top center'
+# plt.legend(loc=9)
+# plt.xlabel('complexidade do modelo')
+# plt.title('Compromisso entre Polarização e Variância')
+# plt.savefig('figura_3-6')
+
+#-Exemplo 6--Grafico de Dispersão------------------------------------------------------
+friends = [70,65,72,63,71,64,60,64,67]
+minutes = [175,170,205,120,220,130,105,145,190]
+labels = ['a','b','c','d','e','f','g','h','i']
+
+plt.scatter(friends, minutes)
+
+# nomeia cada posição
+for label, friend_count, minute_count in zip(labels, friends, minutes):
+    plt.annotate(label,
+                xy=(friend_count, minute_count),    # coloca o rotulo com sua posição
+                xytext=(5,-5),                      # mas compensa um pouco
+                textcoords='offset points')
+    
+plt.title('Minutos Diários vs. Número de Amigos')
+plt.xlabel('nº de amigos')
+plt.ylabel('minutos diários passados no site')
+plt.savefig('figura_3-7')
