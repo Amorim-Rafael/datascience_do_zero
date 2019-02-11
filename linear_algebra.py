@@ -1,3 +1,9 @@
+# VECTORS-----------------------------------------------------
+import re, math, random # regexes, math functions, random numbers
+# import matplotlib.pyplot as plt # pyplot
+from collections import defaultdict, Counter
+from functools import partial, reduce
+
 def vector_add(v, w):
     return [v_i + w_i for v_i, w_i in zip(v, w)]
 
@@ -32,11 +38,45 @@ def vector_mean(vectors):
 def dot(v, w):
     return sum(v_i * w_i for v_i, w_i in zip(v, w))
 
-import re, math, random # regexes, math functions, random numbers
-import matplotlib.pyplot as plt # pyplot
+# if __name__ == '__main__':
+#     v1 = [2, 1]
+#     v2 = [1, 2]
+#     v3 = vector_add(v1, v2)
+#     print(v3)
+
+# MATRIX-----------------------------------------------------
+
+A = [[1,2,3],
+    [4,5,6]]
+
+B = [[1,2],
+    [3,4],
+    [5,6]]
+
+def shape(M):
+    num_rows = len(A)
+    num_cols = len(A[0])
+    return num_rows, num_cols
+
+
+def get_row(M, i):
+    return M[i]
+    
+
+def get_column(M, j):
+    return [M_i[j] for M_i in M]
+
+# entry_fn é o nome da função no qual vai ser chamada, passando cada item da linha e coluna
+def make_matrix(num_rows, num_cols, entry_fn):
+    return [[entry_fn(i, j) 
+            for j in range(num_cols)]
+            for i in range(num_rows)]
+
+def is_diagonal(i, j):
+    return 1 if i == j else 0
 
 if __name__ == '__main__':
-    v1 = [2, 1]
-    v2 = [1, 2]
-    v3 = vector_add(v1, v2)
-    print(v3)
+    # print(shape(A))
+    # print(get_row(A, 0))
+    # print(get_column(B, 1))
+    print(make_matrix(5, 5, is_diagonal))
