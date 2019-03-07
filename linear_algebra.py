@@ -38,6 +38,10 @@ def vector_mean(vectors):
 def dot(v, w):
     return sum(v_i * w_i for v_i, w_i in zip(v, w))
 
+
+def sum_of_squares(v):
+    return dot(v, v)
+
 # if __name__ == '__main__':
 #     v1 = [2, 1]
 #     v2 = [1, 2]
